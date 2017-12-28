@@ -66,15 +66,13 @@ let data = {
   'Winterstorm': ['Ice', 'Snowfall', 'Temperature']
 };
 
-const isEmpty = (obj) => {
+function isEmpty(obj) {
   return Object.keys(obj).length === 0 && obj.constructor === Object
-};
+}
 
 const Menu = (props) => {
   const items = props.items;
   const itemRenders = Object.entries(items).map(([key, val]) => {
-    const elem = <li>{key}</li>;
-
     if (isEmpty(val)) {
       return (<li>{key}</li>)
     }
@@ -87,20 +85,19 @@ const Menu = (props) => {
   });
 
   return (
-    <ul>{itemRenders}</ul>
+    <ul style={{textAlign: 'left'}} >{itemRenders}</ul>
   );
 };
 
-class SubMenu extends Component {
-  render() {
-    return (
-      <ul>
-        <li>Text 1</li>
-        <li>Text 2</li>
-        <li>Text 3</li>
-      </ul>
-    );
-  }
+function SubMenu(props) {
+  const itemsRendered = props.items.map((it) => {
+      return (
+        <li>{it}</li>
+      )
+  });
+  return (
+    <ul>{itemsRendered}</ul>
+  );
 }
 
 export default App;
