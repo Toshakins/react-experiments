@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import slugify from 'slugify';
 
 class App extends Component {
   render() {
@@ -73,11 +74,12 @@ function isEmpty(obj) {
 const Menu = (props) => {
   const items = props.items;
   const itemRenders = Object.entries(items).map(([key, val]) => {
+    const elemKey = slugify(key);
     if (isEmpty(val)) {
-      return (<li>{key}</li>)
+      return (<li key={elemKey}>{key}</li>)
     }
     return (
-          <li>
+          <li key={elemKey}>
             {key}
             <SubMenu items={val}/>
           </li>
@@ -91,8 +93,9 @@ const Menu = (props) => {
 
 function SubMenu(props) {
   const itemsRendered = props.items.map((it) => {
+      const key = slugify(it);
       return (
-        <li>{it}</li>
+        <li key={key}>{it}</li>
       )
   });
   return (
